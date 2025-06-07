@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UploadController;
@@ -28,7 +29,11 @@ Route::get('/unisex', function () {
     return view('unisex');
 })->name('unisex');
 
-// Ini sudah benar, ga usah double!
+
 Route::get('/products', [ProductController::class, 'index'])->name('product.index');
 Route::get('/products/{category}', [ProductController::class, 'showCategory'])->name('category.show');
+
+
+
+
 

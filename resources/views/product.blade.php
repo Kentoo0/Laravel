@@ -20,18 +20,7 @@
     @include('product.unisex', ['unisexProducts' => $unisexProducts])
   </div>
 
-  <div class="container my-4">
-    <div class="dropdown mb-4">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-        Pilih Kategori
-      </button>
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <li><a class="dropdown-item" href="{{ route('category.show', 'male') }}">Male</a></li>
-        <li><a class="dropdown-item" href="{{ route('category.show', 'female') }}">Female</a></li>
-        <li><a class="dropdown-item" href="{{ route('category.show', 'unisex') }}">Unisex</a></li>
-      </ul>
-    </div>
-  </div>
+
 
   <!-- Footer -->
   <footer class="bd-footer py-4 py-md-5 mt-5 bg-body-tertiary">
