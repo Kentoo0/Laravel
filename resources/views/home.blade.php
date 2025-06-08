@@ -12,6 +12,8 @@
 <body>
   @include('partials.navbar')
 
+<!-- Carousel -->
+
   <div id="carouselExampleDark" class="carousel carousel-dark slide">
 <div class="carousel-indicators">
     <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -50,9 +52,10 @@ Dari kesegaran citrus pagi hari, kelembutan bunga sore, hingga hangatnya kayu sa
 </div>
   </div>
 
+  <!-- Produk yang jadi rekomendasi -->
 
   <div class="container my-4">
-    <h2>Rekomendasi Produk</h2>
+    <h2>Our Recommendation</h2>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
       @foreach($recommendProducts as $product)
         @include('partials.product_card', ['product' => $product])
@@ -60,9 +63,10 @@ Dari kesegaran citrus pagi hari, kelembutan bunga sore, hingga hangatnya kayu sa
     </div>
   </div>
 
+  <!-- Isi Produk -->
   
   <div class="container my-4">
-    <h2>Semua Produk</h2>
+    <h2>Our Produk</h2>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
       @foreach($maleProducts as $product)
         @include('partials.product_card', ['product' => $product])
@@ -75,6 +79,8 @@ Dari kesegaran citrus pagi hari, kelembutan bunga sore, hingga hangatnya kayu sa
       @endforeach
     </div>
   </div>
+
+ 
 
   @include('partials.footer')
 </body>

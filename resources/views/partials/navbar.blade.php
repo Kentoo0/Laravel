@@ -24,16 +24,13 @@
             <li><a class="dropdown-item" href="{{ route('category.show', 'female') }}">Female</a></li>
             <li><a class="dropdown-item" href="{{ route('category.show', 'unisex') }}">Unisex</a></li>
           </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" aria-disabled="true">Login</a>
-        </li>
+        </li>       
       </ul>
 
       <ul class="navbar-nav mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link" href="{{ route('cart.index') }}">
-            <i class="bi bi-cart"></i> Cart
+            <i class="bi bi-cart"></i>
           </a>
         </li>
       </ul>
