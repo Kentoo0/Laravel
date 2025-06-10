@@ -9,12 +9,12 @@ class HomeController extends Controller
 {
     public function index()
     {
-        // Ambil produk dari 3 kategori
+       
         $maleProducts = Product::where('category_id', 1)->get();
         $femaleProducts = Product::where('category_id', 2)->get();
         $unisexProducts = Product::where('category_id', 3)->get();
 
-        // Produk rekomendasi acak
+      
         $recommendProducts = Product::inRandomOrder()->take(4)->get();
 
         return view('home', compact('maleProducts', 'femaleProducts', 'unisexProducts', 'recommendProducts'));
