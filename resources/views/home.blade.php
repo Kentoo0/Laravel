@@ -66,7 +66,7 @@ Dari kesegaran citrus pagi hari, kelembutan bunga sore, hingga hangatnya kayu sa
   <!-- Isi Produk -->
   
   <div class="container my-4">
-    <h2>Our Produk</h2>
+    <h2>Our Product</h2>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
       @foreach($maleProducts as $product)
         @include('partials.product_card', ['product' => $product])
