@@ -73,7 +73,7 @@
 
   {{-- Semua Produk --}}
   <div class="container my-5">
-    <h2 class="mb-4">Our Product</h2>
+    <h2 class="mb-4">Our Products</h2>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
       @foreach($maleProducts as $product)
         @include('partials.product_card', ['product' => $product])

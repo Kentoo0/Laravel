@@ -17,7 +17,7 @@
       <h1 class="display-4 mt-4">About Us</h1>
     </div>
 
-    <section class="mb-5 bg-info-subtle p-4 rounded">
+    <section class="mb-5">
       <h2 class="fw-bold">Filosofi di Balik Nama “Essensea”</h2>
       <p class="mt-3">
         Nama Essensea merupakan perpaduan dari dua kata: “essence” dan “sea”.

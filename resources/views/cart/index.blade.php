@@ -25,23 +25,28 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($cart as $id => $item)
-            <tr>
-                <td>
-                    <img src="{{ asset($item['image']) }}" width="50" class="me-2" alt="...">
-                    {{ $item['name'] }}
-                </td>
-                <td>{{ $item['quantity'] }}</td>
-                <td>Rp. {{ number_format($item['price'] * $item['quantity'], 0, ',', '.') }}</td>
-                <td>
-                    <form action="{{ route('cart.remove', $id) }}" method="POST">
-                        @csrf
-                        <button class="btn btn-danger btn-sm">Hapus</button>
-                    </form>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
+    @foreach($cart as $id => $item)
+    <tr>
+        <td>
+            <img src="{{ asset($item['image']) }}" width="50" class="me-2" alt="...">
+            {{ $item['name'] }}
+        </td>
+        <td>
+            {{ $item['quantity'] }}
+        <br>
+            <small class="text-muted">Stok tersedia: {{ $item['stock'] }}</small>
+        </td>
+        <td>Rp. {{ number_format($item['price'] * $item['quantity'], 0, ',', '.') }}</td>
+        <td>
+            <form action="{{ route('cart.remove', $id) }}" method="POST">
+                @csrf
+                <button class="btn btn-danger btn-sm">Hapus</button>
+            </form>
+        </td>
+    </tr>
+    @endforeach
+</tbody>
+
     </table>
 
     <h3 class="mt-5">Checkout</h3>
