@@ -6,7 +6,7 @@
       <p class="card-text">Rp. {{ number_format($product->price, 0, ',', '.') }}</p>
        <form action="{{ route('cart.add', $product->id) }}" method="POST">
   @csrf
-  <button type="submit" class="btn btn-primary">Beli Sekarang</button>
+  <a href="{{ route('product.show', $product->id) }}" class="btn btn-outline-primary">Lihat Detail</a>
 </form>
     </div>
   </div>

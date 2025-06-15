@@ -7,33 +7,42 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    // Menampilkan produk berdasarkan kategori (male, female, unisex)
     public function showCategory($category)
-{
-    $categoryId = match ($category) {
-        'male' => 1,
-        'female' => 2,
-        'unisex' => 3,
-        default => null
-    };
+    {
+        $categoryId = match ($category) {
+            'male' => 1,
+            'female' => 2,
+            'unisex' => 3,
+            default => null
+        };
 
-    if (!$categoryId) {
-        abort(404, 'Kategori tidak ditemukan!');
+        if (!$categoryId) {
+            abort(404, 'Kategori tidak ditemukan!');
+        }
+
+        $products = Product::where('category_id', $categoryId)->get();
+
+        return view('product.category', [
+            'category' => ucfirst($category),
+            'products' => $products
+        ]);
     }
 
-    $products = Product::where('category_id', $categoryId)->get();
+    // Halaman utama produk: tampilkan produk dari semua kategori
+    public function index()
+    {
+        $maleProducts = Product::where('category_id', 1)->get();
+        $femaleProducts = Product::where('category_id', 2)->get();
+        $unisexProducts = Product::where('category_id', 3)->get();
 
-    return view('product.category', [
-        'category' => ucfirst($category),
-        'products' => $products
-    ]);
-}
+        return view('product', compact('maleProducts', 'femaleProducts', 'unisexProducts'));
+    }
 
-public function index()
-{
-    $maleProducts = Product::where('category_id', 1)->get();
-    $femaleProducts = Product::where('category_id', 2)->get();
-    $unisexProducts = Product::where('category_id', 3)->get();
-
-    return view('product', compact('maleProducts', 'femaleProducts', 'unisexProducts'));
-}
+    // Detail produk berdasarkan ID
+    public function show($id)
+    {
+        $product = Product::findOrFail($id);
+        return view('product.show', compact('product'));
+    }
 }
