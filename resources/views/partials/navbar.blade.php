@@ -8,12 +8,18 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <!-- Left Side -->
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ route('product.index') }}">Product</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ route('about') }}">About Us</a></li>
 
+      {{-- Left Side --}}
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('home') }}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('product.index') }}">Product</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('about') }}">About Us</a>
+        </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Kategori
@@ -26,20 +32,40 @@
         </li>
       </ul>
 
-      <!-- Right Side -->
+      {{-- Right Side --}}
       <ul class="navbar-nav mb-2 mb-lg-0">
+        {{-- Cart --}}
         <li class="nav-item">
           <a class="nav-link" href="{{ route('cart.index') }}">
             <i class="bi bi-cart"></i>
           </a>
         </li>
 
+        {{-- Auth --}}
         @if(Auth::check())
+
+          {{-- Dashboard admin only --}}
+          @if(Auth::user()->is_admin)
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('dashboard') }}">
+                <i class="bi bi-speedometer2"></i> Dashboard
+              </a>
+            </li>
+          @endif
+
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               {{ Auth::user()->name }}
+              @if(Auth::user()->is_admin)
+                <span class="badge bg-danger ms-1">Admin</span>
+              @endif
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
+              <li>
+                <a class="dropdown-item" href="{{ route('profile.edit') }}">
+                  <i class="bi bi-person"></i> Profile
+                </a>
+              </li>
               <li>
                 <form method="POST" action="{{ route('logout') }}">
                   @csrf

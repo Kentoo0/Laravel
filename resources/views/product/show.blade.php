@@ -31,11 +31,11 @@
         <p><strong>Stok Tersedia:</strong> {{ $product->stock }}</p>
 
         <h5 class="mt-4 fw-semibold">Spesifikasi Produk</h5>
-        <ul class="list-unstyled">
-          <li><strong>Volume:</strong> {{ $product->volume ?? '-' }} ml</li>
-          <li><strong>Ketahanan aroma:</strong> {{ $product->durasi ?? '-' }}</li>
-          <li><strong>Kategori aroma:</strong> {{ $product->kategori ?? '-' }}</li>
-        </ul>
+        <ul class="list-unstyled">            <li><strong>Volume:</strong> {{ $product->volume ?? '-' }} ml</li>
+        <li><strong>Ketahanan aroma:</strong> {{ $product->longevity ?? '-' }}</li>
+        <li><strong>Jenis:</strong> {{ $product->type ?? '-' }}</li>
+        <li><strong>Target gender:</strong> {{ $product->gender ?? '-' }}</li>
+    </ul>
       </div>
     </div>
   </div>

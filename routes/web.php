@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\IsAdmin;
 use App\Http\Controllers\{
     AdminController,
     ProfileController,
@@ -18,7 +19,6 @@ use App\Http\Controllers\{
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-
 Route::view('/about', 'about')->name('about');
 
 Route::view('/upload', 'upload');
@@ -32,7 +32,6 @@ Route::get('/products', [ProductController::class, 'index'])->name('product.inde
 Route::get('/products/{category}', [ProductController::class, 'showCategory'])->name('category.show');
 Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
 
-
 /*
 |--------------------------------------------------------------------------
 | Routes for Authenticated Users
@@ -40,18 +39,22 @@ Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.s
 */
 
 Route::middleware('auth')->group(function () {
-    
-    // Cart & Checkout
+
+    // Cart
     Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     Route::post('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
     Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
 
+    // Checkout
     Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
     Route::get('/checkout/success', function () {
         session()->flash('success', 'Pembayaran berhasil!');
         return redirect()->route('cart.index');
     })->name('checkout.success');
+
+    // Riwayat transaksi
+    Route::get('/transaction/summary/{orderId}', [CheckoutController::class, 'showTransactionSummary'])->name('transaction.summary');
 
     // Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -65,9 +68,14 @@ Route::middleware('auth')->group(function () {
 |--------------------------------------------------------------------------
 */
 
-Route::middleware(['auth', 'is_admin'])->group(function () {
-    Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
-});
+Route::get('/dashboard', [AdminController::class, 'index'])
+    ->middleware(['auth', IsAdmin::class])
+    ->name('dashboard');
+
+    
+
+
+
 
 /*
 |--------------------------------------------------------------------------
