@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Order;
-use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
@@ -12,7 +11,10 @@ class AdminController extends Controller
     {
         $totalUsers = User::count();
         $totalOrders = Order::count();
+        
+        // Tambahkan semua transaksi lengkap dengan relasi
+        $orders = Order::with('user', 'orderItems.product')->latest()->get();
 
-        return view('dashboard', compact('totalUsers', 'totalOrders'));
+        return view('dashboard', compact('totalUsers', 'totalOrders', 'orders'));
     }
 }

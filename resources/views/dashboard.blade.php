@@ -1,27 +1,52 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Dashboard Admin
-        </h2>
-    </x-slot>
+@include('partials.navbar')
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <div class="py-6">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="bg-white p-6 rounded shadow">
-                <p>Selamat datang, {{ Auth::user()->name }}!</p>
-                <p>Anda login sebagai <strong>Admin</strong>.</p>
-            </div>
+<div class="container mt-5">
+  <h3 class="mb-4">Laporan Transaksi</h3>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="bg-white p-4 rounded shadow">
-                    <h3 class="text-lg font-bold">Total Pengguna</h3>
-                    <p class="text-2xl">{{ $totalUsers }}</p>
-                </div>
-                <div class="bg-white p-4 rounded shadow">
-                    <h3 class="text-lg font-bold">Total Pesanan</h3>
-                    <p class="text-2xl">{{ $totalOrders }}</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</x-app-layout>
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered align-middle">
+      <thead class="table-dark">
+        <tr>
+          <th>#</th>
+          <th>User</th>
+          <th>Produk</th>
+          <th>Harga</th>
+          <th>Qty</th>
+          <th>Total</th>
+          <th>Status</th>
+          <th>Tanggal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Loop Laravel (Blade) -->
+        @php $no = 1; @endphp
+        @foreach ($orders as $order)
+          @foreach ($order->orderItems as $item)
+            <tr>
+              <td>{{ $no++ }}</td>
+              <td>{{ $order->user->name ?? '-' }}</td>
+              <td>{{ $item->product->name ?? 'Produk dihapus' }}</td>
+              <td>Rp{{ number_format($item->price, 0, ',', '.') }}</td>
+              <td>{{ $item->quantity }}</td>
+              <td>Rp{{ number_format($item->price * $item->quantity, 0, ',', '.') }}</td>
+              <td>{{ ucfirst($order->status ?? '-') }}</td>
+              <td>{{ $order->created_at->format('d M Y') }}</td>
+            </tr>
+          @endforeach
+        @endforeach
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Tombol kembali -->
+  <div class="mt-3">
+    <a href="{{ route('home') }}" class="btn btn-secondary">
+      <i class="bi bi-arrow-left"></i> Kembali ke Beranda
+    </a>
+  </div>
+</div>
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+@include('partials.footer')
