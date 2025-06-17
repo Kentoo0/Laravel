@@ -8,13 +8,13 @@ use App\Models\Order;
 class AdminController extends Controller
 {
     public function index()
-    {
-        $totalUsers = User::count();
-        $totalOrders = Order::count();
-        
-        // Tambahkan semua transaksi lengkap dengan relasi
-        $orders = Order::with('user', 'orderItems.product')->latest()->get();
+{
+    $orders = Order::with(['user', 'orderItems.product'])->latest()->get();
 
-        return view('dashboard', compact('totalUsers', 'totalOrders', 'orders'));
-    }
+    return view('dashboard', [
+        'orders' => $orders,
+        'totalUsers' => User::count(),
+        'totalOrders' => Order::count(),
+    ]);
+}
 }

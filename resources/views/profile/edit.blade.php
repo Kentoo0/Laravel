@@ -1,50 +1,38 @@
 @include('partials.navbar')
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<div class="container mt-5">
-  <h3 class="mb-4">Riwayat Transaksi</h3>
-
-  <div class="table-responsive">
-    <table class="table table-striped table-hover table-bordered align-middle">
-      <thead class="table-dark">
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
         <tr>
-          <th>#</th>
-          <th>Nama Produk</th>
-          <th>Harga</th>
-          <th>Qty</th>
-          <th>Total</th>
-          <th>Status</th>
-          <th>Tanggal</th>
+            <th>#</th>
+            <th>Produk</th>
+            <th>Total</th>
+            <th>Status</th>
+            <th>Tanggal</th>
         </tr>
-      </thead>
-      <tbody>
-        <!-- Loop Laravel (Blade) -->
-        @php $no = 1; @endphp
-        @foreach ($orders as $order)
-          @foreach ($order->orderItems as $item)
+    </thead>
+    <tbody>
+        @foreach ($orders as $index => $order)
             <tr>
-              <td>{{ $no++ }}</td>
-              <td>{{ $item->product->name ?? 'Produk dihapus' }}</td>
-              <td>Rp{{ number_format($item->price, 0, ',', '.') }}</td>
-              <td>{{ $item->quantity }}</td>
-              <td>Rp{{ number_format($item->price * $item->quantity, 0, ',', '.') }}</td>
-              <td>{{ ucfirst($order->status ?? '-') }}</td>
-              <td>{{ $order->created_at->format('d M Y') }}</td>
+                <td>{{ $index + 1 }}</td>
+                <td>
+                    @foreach ($order->orderItems as $item)
+                        {{ $item->product->name ?? 'Produk tidak tersedia' }} x{{ $item->quantity }}<br>
+                    @endforeach
+                </td>
+                <td>Rp{{ number_format($order->total, 0, ',', '.') }}</td>
+                <td>{{ ucfirst($order->status) }}</td>
+                <td>{{ $order->created_at->format('d M Y H:i') }}</td>
             </tr>
-          @endforeach
         @endforeach
-      </tbody>
-    </table>
-  </div>
+    </tbody>
+</table>
 
-  <!-- Tombol kembali -->
-  <div class="mt-3">
-    <a href="{{ route('home') }}" class="btn btn-outline-primary">
-      <i class="bi bi-arrow-left-circle"></i> Kembali ke Beranda
+<div class="mt-4">
+    <a href="{{ route('home') }}" class="btn btn-secondary">
+        <i class="bi bi-house"></i> Kembali ke Beranda
     </a>
-  </div>
 </div>
-
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 @include('partials.footer')
