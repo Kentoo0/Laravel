@@ -25,27 +25,20 @@
 
     <div class="carousel-inner">
       <div class="carousel-item active" data-bs-interval="10000">
-        <img src="{{ asset('images/essensea.png') }}" class="d-block w-100" alt="Essensea Slide 1" style="height: 450px; object-fit: cover;">
+        <img src="{{ asset('images/slide1.png') }}" class="d-block w-100" alt="Essensea Slide 1" style="height: 450px; object-fit: cover;">
         <div class="carousel-caption d-none d-sm-block">
-          <p>Dive into Every Scent</p>
         </div>
       </div>
 
       <div class="carousel-item" data-bs-interval="5000">
-        <img src="{{ asset('images/2.png') }}" class="d-block w-100" alt="Essensea Slide 2" style="height: 450px; object-fit: cover;">
+        <img src="{{ asset('images/slide2.png') }}" class="d-block w-100" alt="Essensea Slide 2" style="height: 450px; object-fit: cover;">
         <div class="carousel-caption d-none d-sm-block">
-          <p>
-            Temukan keajaiban aroma dalam setiap tetes. Dari kesegaran citrus pagi hari, kelembutan bunga sore, hingga hangatnya kayu saat senja.
-          </p>
         </div>
       </div>
 
       <div class="carousel-item">
-        <img src="{{ asset('images/essensea3.png') }}" class="d-block w-100" alt="Essensea Slide 3" style="height: 450px; object-fit: cover;">
+        <img src="{{ asset('images/slide3.png') }}" class="d-block w-100" alt="Essensea Slide 3" style="height: 450px; object-fit: cover;">
         <div class="carousel-caption d-none d-sm-block">
-          <p>
-            Essensea mengajakmu menyelami dunia wewangian yang terinspirasi dari ketenangan dan kekuatan laut.
-          </p>
         </div>
       </div>
     </div>

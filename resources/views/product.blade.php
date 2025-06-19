@@ -9,6 +9,11 @@
 <body>
   @include('partials.navbar')
 
+  <div class="container py-5">
+    <div class="text-center mb-5">
+      <img src="{{ asset('images/product.png') }}" alt="About Us" class="img-fluid rounded">
+    </div>
+
   <div class="container my-4">
     <!-- Bagian Male -->
     @include('product.male', ['maleProducts' => $maleProducts])

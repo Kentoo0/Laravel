@@ -13,7 +13,7 @@
 
   <div class="container py-5">
     <div class="text-center mb-5">
-      <img src="{{ asset('images/2.png') }}" alt="About Us" class="img-fluid rounded">
+      <img src="{{ asset('images/about us.png') }}" alt="About Us" class="img-fluid rounded">
       <h1 class="display-4 mt-4">About Us</h1>
     </div>
 
