@@ -89,13 +89,6 @@ document.getElementById('pay-button').addEventListener('click', function (e) {
             onSuccess: function(result) {
                 console.log(result);
                 window.location.href = '/checkout/success';
-            },
-            onPending: function(result) {
-                console.log(result);
-            },
-            onError: function(result) {
-                console.log(result);
-                alert('Terjadi kesalahan. Silakan coba lagi.');
             }
         });
     })
