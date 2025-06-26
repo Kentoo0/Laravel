@@ -34,10 +34,9 @@ Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.s
 
 /*
 |--------------------------------------------------------------------------
-| Routes for Authenticated Users
+| Authenticated User Routes
 |--------------------------------------------------------------------------
 */
-
 Route::middleware('auth')->group(function () {
 
     // Cart
@@ -48,39 +47,36 @@ Route::middleware('auth')->group(function () {
 
     // Checkout
     Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
-    Route::get('/checkout/success', function () {
-        session()->flash('success', 'Pembayaran berhasil!');
-        return redirect()->route('cart.index');
-    })->name('checkout.success');
+    Route::get('/checkout/success', fn() => redirect()->route('cart.index')->with('success', 'Pembayaran berhasil!'))
+        ->name('checkout.success');
 
-    // Riwayat transaksi
+    // Transaction Summary
     Route::get('/transaction/summary/{orderId}', [CheckoutController::class, 'showTransactionSummary'])->name('transaction.summary');
 
-    // Profile
+    // User Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // Admin Routes (grouped)
+    Route::middleware(IsAdmin::class)->prefix('admin')->name('admin.')->group(function () {
+        Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
+        Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+    });
 });
 
 /*
 |--------------------------------------------------------------------------
-| Admin Only Routes
+| Admin Dashboard (Requires Login and Admin Role)
 |--------------------------------------------------------------------------
 */
-
 Route::get('/dashboard', [AdminController::class, 'index'])
     ->middleware(['auth', IsAdmin::class])
     ->name('dashboard');
-
-    
-
-
-
 
 /*
 |--------------------------------------------------------------------------
 | Auth Routes (Login, Register, etc.)
 |--------------------------------------------------------------------------
 */
-
 require __DIR__ . '/auth.php';

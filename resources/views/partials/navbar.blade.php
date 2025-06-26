@@ -48,7 +48,7 @@
           @if(Auth::user()->is_admin)
             <li class="nav-item">
               <a class="nav-link" href="{{ route('dashboard') }}">
-                <i class="bi bi-speedometer2"></i> Dashboard
+                 Dashboard
               </a>
             </li>
           @endif
